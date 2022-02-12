@@ -1,23 +1,40 @@
 /* Improved Euler's method */
 #include <stdio.h>
 #include <math.h>
-float f1(float x,float y)
-{ return(x+y); }
+float f1(float x,float y){
+     return(-0.5*x/y); 
+}
+float r(float x){
+    return(sqrt(4-x*x/2));
+}
 int main(void)
 {
     int i;
     float x[100],y[100],h=0.2,r;
     x[0]=0.0;
-    y[0]=0.0;
+    y[0]=2.0;
     i=0;
     printf(" x , y (error)\n");
     do {
         x[i+1]=x[i]+h;
         y[i+1]=y[i]+f1(x[i],y[i])*h;
-        y[i+1]=y[i]+(f1(x[i],y[i])
-        +f1(x[i+1],y[i+1]))*h/2.0;
+        y[i+1]=y[i]+(f1(x[i],y[i])+f1(x[i+1],y[i+1]))*h/2.0;
         i++;
         r=exp(x[i])-x[i]-1;
-        printf("%f, %f (%f)\n",x[i],y[i],r-y[i]);
-    } while(x[i]<1.0);
+        printf("%f, %f (%f)\n",x[i],y[i],r-(x[i])-y[i]);
+    } while(x[i]<2.0);
 }
+
+/*
+ x , y (error)
+0.200000, 1.995000 (-1.773597)
+0.400000, 1.979912 (-1.488087)
+0.600000, 1.954502 (-1.132383)
+0.800000, 1.918361 (-0.692820)
+1.000000, 1.870866 (-0.152585)
+1.200000, 1.811127 (0.508990)
+1.400000, 1.737881 (1.317320)
+1.600000, 1.649331 (2.303702)
+1.800000, 1.542849 (3.506799)
+2.000000, 1.414398 (4.974660)
+*/
